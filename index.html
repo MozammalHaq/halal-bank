@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halal Bank</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div id="login-area">
+                    <h1 class="text-center mb-5">Welcome to Halal Bank</h1>
+                    <div class="submit-area">
+                        <h4>Login</h4>
+                        <input type="text" name="" class="form-control mb-4 mt-4" placeholder="Email">
+                        <input type="password" name="" class="form-control mb-4" placeholder="Password">
+                        <button class="btn btn-success" id="login">Enter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div id="transection-area">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="deposit status">
+                                <h5>Deposit</h5>
+                                <h2>$ <span id="currentDeposit">00</span></h2>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="withdraw status">
+                                <h5>Withdraw</h5>
+                                <h2>$00</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="balance status">
+                                <h5>Balance</h5>
+                                <h2>$ <span id="currentBalance">1240</span></h2>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <div class="submit-area">
+                                <h4>Deposit</h4>
+                                <input type="text" id="deposit-amout" class="form-control mb-4 mt-3"
+                                    placeholder="$ amount you wand to Deposit.">
+                                <button class="btn btn-success" id="deposit">Deposit</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="submit-area">
+                                <h4>Withdraw</h4>
+                                <input id="withdrawAmount" type="text" class="form-control mb-4 mt-3"
+                                    placeholder="$ amount you wand to withdraw.">
+                                <button id="addWithdraw" class="btn btn-success">Withdraw</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script>
+        // Login button event handler.
+        const loginBtn = document.getElementById('login');
+        loginBtn.addEventListener('click', function () {
+            const loginArea = document.getElementById('login-area');
+            loginArea.style.display = 'none';
+            const transectionArea = document.getElementById('transection-area');
+            transectionArea.style.display = 'block';
+        })
+
+        //
+        const depositBtn = document.getElementById('deposit');
+        depositBtn.addEventListener('click', function () {
+            const depositAmout = document.getElementById('deposit-amout').value;
+            const depositNumber = parseFloat(depositAmout); //না দিয়ে নিচের ফাংশন লিখলেও হবে।
+            //const depositNumber = getInputNumber("depositAmout");
+
+            // Add Number to Diposit
+            // const currentDeposit = document.getElementById('currentDeposit').innerText;//Input থেকে মান নিতে হলে InnerText নিতে হয়।
+            // const currentDepositNumber = parseFloat(currentDeposit);
+            // const totalDeposit = depositNumber + currentDepositNumber;
+            // document.getElementById('currentDeposit').innerText = totalDeposit;
+            updateSpanText("currentDeposit", depositNumber);
+
+            // Add Number to Banlance
+            // const currentBalance = document.getElementById('currentBalance').innerText;
+            // const currentBalanceNumber = parseFloat(currentBalance);
+            // const totalCurrentBalance = depositNumber + currentBalanceNumber;
+            // document.getElementById('currentBalance').innerText = totalCurrentBalance;
+
+            updateSpanText("currentBalance", depositNumber);
+
+            document.getElementById('deposit-amout').value = "";
+        })
+        //withdraw button event handler.
+        const withdrawBtn = document.getElementById('addWithdraw',);
+        withdrawBtn.addEventListener('click', function () {
+            // const withdrawAmount = document.getElementById('withdrawAmount').value;
+            // const withdrawNumber = parseFloat(withdrawAmount); এখানে না লিখে নিচে ফাংশনে লেখা হইছে।
+            const withdrawNumber =  getInputNumber("withdrawAmount");
+            console.log(withdrawNumber)
+
+            function getInputNumber(id) {
+                const Amount = document.getElementById(id).value;
+                const amountNumber = parseFloat(Amount);
+                return  amountNumber;
+            }
+        })
+
+        // একটু মডিফাই করে।
+        function updateSpanText(id, depositNumber) {
+            const current = document.getElementById(id).innerText;
+            const currentBalance = parseFloat(current);
+            const totalAmount = depositNumber + currentBalance;
+            document.getElementById(id).innerText = totalAmount;
+        }
+
+
+        // সরাসরি লিখা
+        // function updateSpanText(id, depositNumber) {
+        //     const currentBalance = document.getElementById(id).innerText;
+        //     const currentBalanceNumber = parseFloat(currentBalance);
+        //     const totalCurrentBalance = depositNumber + currentBalanceNumber;
+        //     document.getElementById(id).innerText = totalCurrentBalance;
+        // }
+    </script>
+</body>
+
+</html>
